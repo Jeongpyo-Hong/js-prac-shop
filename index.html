@@ -4,7 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="index.css" />
+    <!-- css -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <!-- jQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <!-- js -->
+    <script src="index.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <!-- navbar -->
+      <nav>
+        <div class="brand-name">SHOP</div>
+        <div class="menu-box">
+          <div>Home</div>
+          <div class="disable">스토어</div>
+          <div class="disable">시공견적</div>
+        </div>
+      </nav>
+
+      <article>
+        <!-- searchbar -->
+        <form class="search-container">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input class="search-input" type="text" placeholder="검색어 입력" />
+        </form>
+
+        <!-- goods -->
+        <div class="goods-container"></div>
+
+        <!-- cart -->
+        <div class="cart-container">
+          <div class="cart-title">장바구니</div>
+          <div class="cart-item">
+            <div class="before-text show">DRAG AND DROP</div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/e53238af8a.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
