@@ -64,4 +64,35 @@ $.get("store.json").done((data) => {
   });
 
   // drop
+  $(".cart-item").on("dragover", function (e) {
+    e.preventDefault();
+  });
+  $(".cart-item").on("drop", function (e) {
+    e.preventDefault();
+    $(".before-text").removeClass("show");
+    const id = e.originalEvent.dataTransfer.getData("text");
+
+    // 드래그한 상품이 장바구니에 있으면 개수만 증가
+    const targetLength = $(`.cart-item .item-wrap[key=${id}]`).length;
+    const preCnt = $(`.cart-item .item-wrap[key=${id}] input`).val();
+    if (targetLength) {
+      $(`.cart-item .item-wrap[key=${id}] input`).attr("value", +preCnt + 1);
+      return;
+    }
+
+    //처음 등록한 상품인경우 -> 클릭 상품 복제. cnt = 1
+    const newItem = data.products.filter((item) => item.id == id);
+
+    cnt = 1;
+    const temp = `
+        <div class="item-wrap" key=${newItem[0].id}>
+          <img src="img/${newItem[0].photo}" />
+          <div class="title">${newItem[0].title}</div>
+          <div class="brand">${newItem[0].brand}</div>
+          <div>가격 : ${newItem[0].price}</div>
+          <input type="text" value=${cnt} />
+        </div>
+      `;
+    $(".cart-item").append(temp);
+  });
 });
