@@ -15,8 +15,32 @@ $.get("store.json").done((data) => {
     $(".goods-container").append(temp);
   });
 
+  /**
+   * 검색어 찾기
+   */
+  $("form").on("submit", function (e) {
+    e.preventDefault();
+    $(".goods-container").empty();
+    const result = $("#search").val();
+    const searchItem = data.products.filter((item) =>
+      item.title.includes(result)
+    );
+    searchItem.map((item) => {
+      const temp = `
+        <div class="item-wrap" id=${item.id} key=${item.id} draggable="true">
+          <img src="img/${item.photo}" />
+          <div class="title">${item.title}</div>
+          <div class="brand">${item.brand}</div>
+          <div>가격 : ${item.price}</div>
+          <button class="add-item">담기</button>
+        </div>
+      `;
+      $(".goods-container").append(temp);
+    });
+  });
+
   function drag(e) {
-    e.originalEvent.dataTransfer.setData("text", e.target.id);
+    e.originalEvent.dataTransfer.setData("id", e.target.id);
   }
 
   /**
@@ -24,6 +48,7 @@ $.get("store.json").done((data) => {
    * */
   let cnt = 0;
   $(".add-item").on("click", function () {
+    console.log("a");
     $(".before-text").removeClass("show");
 
     // 클릭한 상품의 id값 찾기
@@ -59,8 +84,7 @@ $.get("store.json").done((data) => {
    */
   // drag
   $(".goods-container .item-wrap").on("dragstart", function (e) {
-    console.log(this.id);
-    e.originalEvent.dataTransfer.setData("text", this.id);
+    e.originalEvent.dataTransfer.setData("id", this.id);
   });
 
   // drop
@@ -70,7 +94,7 @@ $.get("store.json").done((data) => {
   $(".cart-item").on("drop", function (e) {
     e.preventDefault();
     $(".before-text").removeClass("show");
-    const id = e.originalEvent.dataTransfer.getData("text");
+    const id = e.originalEvent.dataTransfer.getData("id");
 
     // 드래그한 상품이 장바구니에 있으면 개수만 증가
     const targetLength = $(`.cart-item .item-wrap[key=${id}]`).length;
