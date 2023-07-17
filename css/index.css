@@ -106,6 +106,7 @@ article {
   color: white;
   padding: 5px 10px;
   border-radius: 10px;
+  margin-top: 10px;
 }
 .item-wrap:hover img {
   opacity: 0.5;
@@ -143,6 +144,14 @@ article {
   font-size: 20px;
   font-weight: 800;
   color: white;
+}
+
+.total-price-wrap {
+  margin-top: 20px;
+}
+.total-price-wrap .text {
+  font-weight: 800;
+  margin-bottom: 10px;
 }
 
 .show {
